@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+  margin: auto;
+  overflow-x: hidden;
+  cursor: default;
+}
+.drawerOpen {
+  padding-right: 15px;
+  position: relative;
+  overflow: hidden;
+}
+.drawerOpenTwo {
+  padding-right: 15px;
+  position: relative;
+  overflow: hidden;
+}
+.carouselContainer::-webkit-scrollbar,
+.offerContainer::-webkit-scrollbar,
+.topPicks::-webkit-scrollbar {
+  display: none;
+}
+div.itemBody > div.menuAccordion {
+  border-bottom: 1px solid #f1f1f6;
+}
+.textEllipse {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+.flatDeals {
+  writing-mode: vertical-lr;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 4px;
+}
+.slider:before {
+  content: "";
+  height: 18px;
+  width: 18px;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: all 0.4s;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  border: 2px solid #cccccc;
+}
+input:checked + .slider {
+  background-color: rgb(0, 128, 0);
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(17px);
+  -ms-transform: translateX(17px);
+  transform: translateX(17px);
+  border: 2px solid rgb(0, 128, 0);
+}
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 400px;
+  display: inline-block;
+  position: relative;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: placeholderShimmer;
+  -webkit-animation-timing-function: linear;
+}
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
