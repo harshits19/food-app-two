@@ -13,11 +13,11 @@ export const fetchData = createAsyncThunk(
   "HomeData/fetchData",
   async ({ lat, long }) => {
     const res = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}`
+      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}`,
     );
     const data = await res.json();
     return data;
-  }
+  },
 );
 
 export const fetchMoreData = createAsyncThunk(
@@ -47,11 +47,11 @@ export const fetchMoreData = createAsyncThunk(
               String(page),
           },
         }),
-      }
+      },
     );
     const data = await response.json();
     return data;
-  }
+  },
 );
 
 const HomePageSlice = createSlice({

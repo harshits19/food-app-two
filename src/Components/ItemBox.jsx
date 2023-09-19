@@ -8,12 +8,12 @@ const ItemBox = ({ data, restInfo }) => {
   const cartItems = useSelector(selectCartItem);
   const currentItem = useMemo(
     () => cartItems.find((item) => item.id == data?.info?.id),
-    [cartItems]
+    [cartItems],
   );
 
   return (
-    <div className="justify-between flex mx-0 my-5 pt-0 pb-5 px-0 border-b-[0.5px] border-b-[#d3d3d3]">
-      <div className="w-[80%]">
+    <div className="mx-0 my-5 flex justify-between border-b-[0.5px] border-b-[#d3d3d3] px-0 pb-5 pt-0">
+      <div className="w-[70%] sm:w-[80%]">
         <div>
           {data?.info?.isVeg ? (
             <img
@@ -27,10 +27,10 @@ const ItemBox = ({ data, restInfo }) => {
             />
           )}
         </div>
-        <div className="text-[#3e4152] text-base font-medium break-words">
+        <div className="break-words text-base font-medium text-[#3e4152]">
           {data?.info?.name}
         </div>
-        <div className="text-[#3e4152] text-sm font-normal mt-[2px] flex items-center">
+        <div className="mt-[2px] flex items-center text-sm font-normal text-[#3e4152]">
           <BiRupee />
           {data?.info?.price
             ? data?.info?.price / 100
@@ -38,14 +38,14 @@ const ItemBox = ({ data, restInfo }) => {
             ? data?.info?.finalPrice / 100
             : data?.info?.defaultPrice / 100}
         </div>
-        <div className=" w-[98%] text-[#282c3f73] tracking-tighter text-sm leading-[1.3] mt-2">
+        <div className=" mt-2 w-[98%] text-sm leading-[1.3] tracking-tighter text-[#282c3f73]">
           {data?.info?.description}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center w-[20%]">
+      <div className="flex  flex-col items-center justify-center">
         {data?.info?.imageId && (
           <img
-            className="w-[118px] h-[96px] mb-[-30px] rounded-md"
+            className="mb-[-30px] h-[96px] w-[118px] rounded-md"
             src={
               "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
               data?.info?.imageId
@@ -54,21 +54,24 @@ const ItemBox = ({ data, restInfo }) => {
         )}
         {!currentItem ? (
           <div
-            className="shadow-[0_3px_8px_#e9e9eb] rounded h-9 w-24 border cursor-pointer bg-white flex text-[#60b246] border-solid border-[#d4d5d9] justify-center items-center text-[13px] font-semibold"
-            onClick={() => dispatch(addItem(data?.info, restInfo))}>
+            className="flex h-9 w-24 cursor-pointer items-center justify-center rounded border border-solid border-[#d4d5d9] bg-white text-[13px] font-semibold text-[#60b246] shadow-[0_3px_8px_#e9e9eb]"
+            onClick={() => dispatch(addItem(data?.info, restInfo))}
+          >
             ADD
           </div>
         ) : (
-          <div className="shadow-[0_3px_8px_#e9e9eb] rounded h-9 w-24 border cursor-pointer bg-white flex text-[#60b246] border-solid border-[#d4d5d9]  items-center justify-around text-sm">
+          <div className="flex h-9 w-24 cursor-pointer items-center justify-around rounded border border-solid border-[#d4d5d9] bg-white  text-sm text-[#60b246] shadow-[0_3px_8px_#e9e9eb]">
             <span
-              className="text-[#bebfc5] text-[18px]"
-              onClick={() => dispatch(removeItem({ cartItem: data?.info }))}>
+              className="text-[18px] text-[#bebfc5]"
+              onClick={() => dispatch(removeItem(data?.info))}
+            >
               -
             </span>
             {currentItem?.qty}
             <span
               className="animate-[0.2s_ease] text-[18px] hover:scale-125"
-              onClick={() => dispatch(addItem(data?.info, restInfo))}>
+              onClick={() => dispatch(addItem(data?.info, restInfo))}
+            >
               +
             </span>
           </div>

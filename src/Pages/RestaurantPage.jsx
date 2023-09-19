@@ -6,6 +6,8 @@ import RestaurantInfo from "../Components/RestaurantInfo";
 import RestaurantMenu from "../Components/RestaurantMenu";
 import useFetchRestMenu from "../Hooks/useFetchRestMenu";
 import UseTop from "../Hooks/useTop";
+import CartModal from "../Components/CartModal";
+import RestaurantBottomSection from "../Components/RestaurantBottomSection";
 
 const RestaurantPage = () => {
   const { resId } = useParams();
@@ -22,21 +24,27 @@ const RestaurantPage = () => {
     return () => (document.getElementById("header").style.position = "sticky");
   }, []);
   return data ? (
-    <div className="max-w-[800px] min-h-[800px] flex-col flex mx-auto my-5">
-      <RestaurantInfo data={data?.info} offers={data?.offers} />
-      <div className="h-full w-full px-4 py-8">
-        <RestaurantMenu
-          data={data?.restList}
-          restInfo={{
-            name: data?.info?.name,
-            areaName: data?.info?.areaName,
-            resId: data?.info?.id,
-            dp: data?.info?.cloudinaryImageId,
-          }}
-        />
+    <>
+      <div className="mx-auto my-5 flex min-h-[800px] max-w-[800px] flex-col px-4">
+        <RestaurantInfo data={data?.info} offers={data?.offers} />
+        <div className="h-full w-full px-4 py-8">
+          <RestaurantMenu
+            data={data?.restList}
+            restInfo={{
+              name: data?.info?.name,
+              areaName: data?.info?.areaName,
+              resId: data?.info?.id,
+              dp: data?.info?.cloudinaryImageId,
+              distance: data?.info?.sla?.lastMileTravelString,
+              delFees: data?.info?.feeDetails?.totalFee,
+            }}
+          />
+          <RestaurantBottomSection data={data?.restList} />
+        </div>
       </div>
       <UseTop />
-    </div>
+      <CartModal />
+    </>
   ) : (
     <></>
   );

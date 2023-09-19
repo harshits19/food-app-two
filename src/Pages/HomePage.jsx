@@ -21,14 +21,14 @@ const HomePage = () => {
   const serviceStatus = useSelector(selectAvailStatus);
   if (serviceStatus)
     return (
-      <div className="h-screen w-full flex flex-col items-center justify-start">
+      <div className="flex h-screen w-full flex-col items-center justify-start">
         <div className="">
           <img
             src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
-            className="h-64 w-56 mt-24"
+            className="mt-24 h-64 w-56"
           />
         </div>
-        <div className="text-center pt-8">
+        <div className="pt-8 text-center">
           <div className="text-xl font-bold text-defBlack">
             Location Unserviceable
           </div>
@@ -39,13 +39,13 @@ const HomePage = () => {
       </div>
     );
   return (
-    <div className="w-full max-w-[1200px] mx-auto">
+    <div className="mx-auto w-full max-w-[1200px]">
       <Carousel />
       <div className="px-4">
-        <h1 className="text-2xl text-black font-bold">
+        <h1 className="text-2xl font-bold text-black">
           {`Restaurants with online food delivery in ${userLocation?.city}`}
         </h1>
-        <div className="grid grid-cols-[repeat(4,1fr)] gap-x-8 gap-y-4 my-8">
+        <div className="my-8 grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-x-8 gap-y-4 md:grid-cols-[repeat(3,1fr)] lg:grid-cols-[repeat(4,1fr)]">
           {restaurants?.map((item) => {
             return (
               <Link to={"restaurant/" + item?.info?.id} key={item?.info?.id}>
@@ -55,17 +55,17 @@ const HomePage = () => {
           })}
           {status === "loading" && (
             <>
-              <div className="shine w-full h-[170px] rounded-2xl"></div>
-              <div className="shine w-full h-[170px] rounded-2xl"></div>
-              <div className="shine w-full h-[170px] rounded-2xl"></div>
-              <div className="shine w-full h-[170px] rounded-2xl"></div>
+              <div className="shine h-[170px] w-full rounded-2xl"></div>
+              <div className="shine h-[170px] w-full rounded-2xl"></div>
+              <div className="shine h-[170px] w-full rounded-2xl"></div>
+              <div className="shine h-[170px] w-full rounded-2xl"></div>
             </>
           )}
         </div>
-        <div className="flex justify-center my-10">
+        <div className="my-10 flex justify-center">
           {page <= 150 && (
             <button
-              className="w-max text-center rounded px-6 font-bold text-md h-8 border-2 border-defBlack hover:border-defColor hover:text-defColor"
+              className="text-md h-8 w-max rounded border-2 border-defBlack px-6 text-center font-bold hover:border-defColor hover:text-defColor"
               onClick={() => {
                 dispatch(updatePage());
                 dispatch(
@@ -73,9 +73,10 @@ const HomePage = () => {
                     lat: userLocation?.lat,
                     long: userLocation?.long,
                     page: page,
-                  })
+                  }),
                 );
-              }}>
+              }}
+            >
               Load More Restaurants
             </button>
           )}

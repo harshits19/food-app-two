@@ -7,18 +7,20 @@ const Accordion = ({ data, isVeg, restInfo }) => {
   const calcLength = data?.itemCards
     ? data?.itemCards?.filter(
         (data) =>
-          isVeg || data?.card?.info?.itemAttribute?.vegClassifier === "VEG"
+          isVeg || data?.card?.info?.itemAttribute?.vegClassifier === "VEG",
       )?.length
     : data?.categories?.length;
   return (
     <div
-      className="menuAccordion px-0 py-4 scroll-mt-20 border-b-[16px] border-b-[#f1f1f6]"
-      id={data?.title}>
+      className="menuAccordion scroll-mt-20 border-b-[16px] border-b-[#f1f1f6] px-0 py-4"
+      id={data?.title}
+    >
       <div
-        className="text-[#3e4152] cursor-pointer w-full justify-between items-center text-base font-bold leading-[1.2] transition-all duration-[0.2s] flex"
+        className="flex w-full cursor-pointer items-center justify-between text-base font-bold leading-[1.2] text-[#3e4152] transition-all duration-[0.2s]"
         onClick={() => {
           isAVisible ? setIsAVisible(false) : setIsAVisible(true);
-        }}>
+        }}
+      >
         {data?.title + " " + "(" + calcLength + ")"}
         <button className="text-2xl">
           {isAVisible ? <BiChevronDown /> : <BiChevronUp />}
@@ -31,7 +33,7 @@ const Accordion = ({ data, isVeg, restInfo }) => {
                 ?.filter(
                   (data) =>
                     isVeg ||
-                    data?.card?.info?.itemAttribute?.vegClassifier === "VEG"
+                    data?.card?.info?.itemAttribute?.vegClassifier === "VEG",
                 )
                 .map((data, idx) => {
                   return (

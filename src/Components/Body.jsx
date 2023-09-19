@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import LocationDrawer from "./LocationDrawer";
 import SigninDrawer from "./SigninDrawer";
+import ShortHeader from "./ShortHeader";
 
 const Body = () => {
   const [locationDrawer, setLocationDrawer] = useState(false);
@@ -17,6 +18,7 @@ const Body = () => {
   return (
     <>
       <Header toggle={toggleOne} toggleTwo={toggleTwo} />
+      <ShortHeader toggle={toggleOne} toggleTwo={toggleTwo} />
       <LocationDrawer open={locationDrawer} toggle={toggleOne} />
       <SigninDrawer openTwo={signinDrawer} toggleTwo={toggleTwo} />
       <Outlet />

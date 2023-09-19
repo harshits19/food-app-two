@@ -1,4 +1,54 @@
 const AboutPage = () => {
-  return <div>AboutPage</div>;
+  return (
+    <div className="w-full bg-[#e9ecee] px-4 pt-12">
+      <div className="flex flex-col items-center py-8">
+        <div className="text-center text-5xl font-bold text-defBlack">
+          Hi. I'm Harshit Gaur
+        </div>
+        <div className="mt-5 h-2 w-[20%] bg-defColor"></div>
+      </div>
+      <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-4 py-8 md:flex-row ">
+        <div className="">
+          <img
+            src="https://foodsimp.netlify.app/dp.87514181.jpg"
+            className="h-[250px] w-[250px] rounded-full lg:h-[350px] lg:w-[350px]"
+          ></img>
+        </div>
+        <div className="lg:py-8">
+          <div className="border-b-[1px] border-b-[#80808042] pb-5 text-2xl font-semibold">
+            I'm a tech enthusiast 👻, and i love designing websites.
+          </div>
+          <div>
+            <div className="mx-0 my-4 text-2xl font-semibold">
+              More about me
+            </div>
+            <div>
+              <ul className="list-none text-xl">
+                <li>👀 I’m interested in web designing and developement</li>
+                <li>🌱 I’m currently learning React Js</li>
+                <li>⚡ Want to know more about Backend develepment</li>
+                <li>💞️ I’m looking to collaborate on web dev projects</li>
+                <li>📫 Reach me via : gaurharshit4@gmail.com</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center p-8 text-2xl font-semibold text-defBlack md:flex-row">
+        Connect with me on :
+        <div className="flex">
+          <a href="https://linkedin.com/in/harshitgaur19" target="_blank">
+            <img src="https://foodsimp.netlify.app/linkedinIcon.13493839.png" />
+          </a>
+          <a href="https://instagram.com/_harshitz" target="_blank">
+            <img src="https://foodsimp.netlify.app/instaIcon.faad7e9a.png" />
+          </a>
+          <a href="mailto::gaurharshit4@gmail.com" target="_blank">
+            <img src="https://foodsimp.netlify.app/gmailIcon.0c7fa5a8.png" />
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 };
 export default AboutPage;
