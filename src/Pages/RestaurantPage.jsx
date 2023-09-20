@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectLocationState } from "../Utilities/AppSlice";
 import RestaurantInfo from "../Components/RestaurantInfo";
 import RestaurantMenu from "../Components/RestaurantMenu";
@@ -9,11 +9,9 @@ import useTitle from "../Hooks/useTitle";
 import CartModal from "../Components/CartModal";
 import RestaurantBottomSection from "../Components/RestaurantBottomSection";
 import RestaurantPageShimmer from "../Components/RestaurantPageShimmer";
-import { fetchRestaurantData } from "../Utilities/RestSlice";
 
 const RestaurantPage = () => {
   const { resId } = useParams();
-  const dispatch = useDispatch();
   const userLocation = useSelector(selectLocationState);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -23,13 +21,6 @@ const RestaurantPage = () => {
       resId: resId,
       setData: setData,
     });
-    dispatch(
-      fetchRestaurantData({
-        lat: userLocation?.lat,
-        long: userLocation?.long,
-        resId: resId,
-      }),
-    );
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     document.getElementById("header").style.position = "inherit";
     if (mediaQuery.matches) {
@@ -48,7 +39,7 @@ const RestaurantPage = () => {
   return data?.info ? (
     <>
       <div className="mx-auto my-2 flex min-h-[800px] max-w-[800px] flex-col md:my-5 md:px-4">
-        <RestaurantInfo data={data?.info} offers={data?.offers} />
+        <RestaurantInfo data={data} />
         <div className="h-full w-full px-4 py-8">
           <RestaurantMenu
             data={data?.restList}
@@ -67,9 +58,7 @@ const RestaurantPage = () => {
       <CartModal />
     </>
   ) : (
-    <>
-      <RestaurantPageShimmer />
-    </>
+    <RestaurantPageShimmer />
   );
 };
 export default RestaurantPage;

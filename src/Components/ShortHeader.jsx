@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCartItem } from "../Utilities/CartSlice";
 import { selectLocationState } from "../Utilities/AppSlice";
@@ -33,9 +33,9 @@ const ShortHeader = ({ toggle, toggleTwo }) => {
               <BiChevronDown className="mr-4 text-2xl text-defColor" />
             </div>
           </div>
-          <Link to="/">
+          <NavLink to="/">
             <DefLogo classList={"h-10 w-8 fill-defColor"} />
-          </Link>
+          </NavLink>
         </div>
       </header>
       <footer
@@ -43,48 +43,70 @@ const ShortHeader = ({ toggle, toggleTwo }) => {
         id="mobileNav"
       >
         <div className="relative flex flex-row justify-evenly bg-white text-xs font-medium uppercase text-defGray">
-          <Link to="/" className="group w-full py-2">
-            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
-              <DefLogo
-                classList={"h-5 w-5  fill-defGray group-hover:fill-defBlack"}
-              />
-              Home
-            </div>
-          </Link>
-          <Link to="/search" className="group w-full py-2">
-            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
-              <SearchBtn
-                classList={"h-5 w-5  fill-defGray group-hover:fill-defBlack"}
-              />
-              Search
-            </div>
-          </Link>
-          <Link to="/cart" className="group w-full py-2">
-            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
-              <span className="relative">
-                <CartBtn
-                  classList={
-                    "h-5 w-5 stroke-defGray stroke-[3px] fill-white group-hover:stroke-defBlack group-hover:text-defBlack"
-                  }
+          <NavLink to="/" className="w-full py-2">
+            {({ isActive }) => (
+              <div
+                className={`flex flex-col items-center gap-y-[1px] ${
+                  isActive ? "text-defBlack" : "text-defGray"
+                }`}
+              >
+                <DefLogo
+                  classList={`h-5 w-5 ${
+                    isActive ? "fill-defBlack" : "fill-defGray"
+                  }`}
                 />
-                <span
-                  className="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-sm font-semibold group-hover:text-defBlack"
-                  id="cartCounter"
-                >
-                  {totalItems}
+                Home
+              </div>
+            )}
+          </NavLink>
+          <NavLink to="/search" className="w-full py-2">
+            {({ isActive }) => (
+              <div
+                className={`flex flex-col items-center gap-y-[1px]  ${
+                  isActive ? "text-defBlack" : "text-defGray"
+                }`}
+              >
+                <SearchBtn
+                  classList={`h-5 w-5 ${
+                    isActive ? "fill-defBlack" : "fill-defGray"
+                  }`}
+                />
+                Search
+              </div>
+            )}
+          </NavLink>
+          <NavLink to="/cart" className="w-full py-2">
+            {({ isActive }) => (
+              <div
+                className={`flex flex-col items-center gap-y-[1px]  ${
+                  isActive ? "text-defBlack" : "text-defGray"
+                }`}
+              >
+                <span className="relative">
+                  <CartBtn
+                    classList={`h-5 w-5 stroke-[3px] fill-white ${
+                      isActive ? "stroke-defBlack" : "stroke-defGray"
+                    }`}
+                  />
+                  <span
+                    className="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-sm font-semibold "
+                    id="cartCounter"
+                  >
+                    {totalItems}
+                  </span>
                 </span>
-              </span>
-              <span>Cart</span>
-            </div>
-          </Link>
-          <Link onClick={toggleTwo} className="group w-full py-2">
+                <span>Cart</span>
+              </div>
+            )}
+          </NavLink>
+          <NavLink onClick={toggleTwo} className="group w-full py-2">
             <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
               <ProfileBtn
                 classList={"h-5 w-5 fill-defGray group-hover:fill-defBlack"}
               />
               Signin
             </div>
-          </Link>
+          </NavLink>
         </div>
       </footer>
     </>

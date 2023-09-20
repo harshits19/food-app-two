@@ -1,12 +1,11 @@
-import { BsXLg } from "react-icons/bs";
-import useCurrentLocation from "../Hooks/useCurrentLocation";
 import { useRef, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
+import useCurrentLocation from "../Hooks/useCurrentLocation";
+import useSearchLocation from "../Hooks/useSearchLocation";
+import { addLocation } from "../Utilities/AppSlice";
+import { BsXLg } from "react-icons/bs";
 import { BiTargetLock } from "react-icons/bi";
 import { GoLocation } from "react-icons/go";
-import useSearchLocation from "../Hooks/useSearchLocation";
-
-import { addLocation } from "../Utilities/AppSlice";
 const debounce = (func, wait) => {
   let timeout;
   return (...args) => {

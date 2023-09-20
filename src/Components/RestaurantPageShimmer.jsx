@@ -1,47 +1,39 @@
 const RestaurantPageShimmer = () => {
   return (
-    <div className="mx-auto flex min-h-full max-w-[800px] flex-col p-4">
-      <div className="flex justify-between">
-        <div className="flex flex-col">
-          <div className="shine h-20 w-28 rounded sm:w-40 lg:h-24    lg:w-52"></div>
-          <div className="shine mt-4 h-4 w-56 rounded-sm sm:w-96"></div>
+    <>
+      <div className="shine flex h-16 w-full md:hidden "></div>
+      <div className="mx-auto flex min-h-full max-w-[800px] flex-col p-4 lg:mt-8">
+        <div className="flex justify-between">
+          <div className="shine h-28 w-36 rounded sm:w-40 lg:h-36 lg:w-52"></div>
+          <div className="shine h-24 w-20 rounded sm:m-4"></div>
         </div>
-        <div className="shine h-16 w-14 rounded sm:h-20 sm:w-24 lg:h-24"></div>
-      </div>
-      <div className="mt-8 flex justify-evenly gap-x-2">
-        <div className="shine h-12 w-1/3 lg:h-16"></div>
-        <div className="shine h-12 w-1/3 lg:h-16"></div>
-        <div className="shine h-12 w-1/3 lg:h-16"></div>
-      </div>
-      <div className="mt-8 flex justify-between">
-        <div className="flex flex-col">
-          <div className="shine h-16 w-28 rounded sm:w-32 lg:h-20 lg:w-40"></div>
-          <div className="shine mt-2 h-4 w-56 rounded-sm sm:w-96"></div>
+        <div className="shine mt-4 h-4 w-3/4 rounded-sm sm:w-[34rem] "></div>
+        <div className="shine mt-4 h-4 w-1/2 rounded-sm sm:w-96"></div>
+        <div className="mt-8 flex justify-evenly gap-x-2">
+          <div className="shine h-20 w-1/3 lg:h-24"></div>
+          <div className="shine h-20 w-1/3 lg:h-24"></div>
+          <div className="shine h-20 w-1/3 lg:h-24"></div>
         </div>
-        <div className="shine h-14 w-16 rounded sm:h-20 sm:w-20 lg:h-24 lg:w-28"></div>
-      </div>
-      <div className="mt-8 flex justify-between">
-        <div className="flex flex-col">
-          <div className="shine h-16 w-28 rounded sm:w-32 lg:h-20 lg:w-40"></div>
-          <div className="shine mt-2 h-4 w-56 rounded-sm sm:w-96"></div>
+        <div className="mt-8 flex justify-between">
+          <div className="shine h-20 w-28 rounded sm:h-28 sm:w-40 lg:w-48"></div>
+          <div className="shine h-16 w-20 rounded sm:m-4 sm:h-24 sm:w-28"></div>
         </div>
-        <div className="shine h-14 w-16 rounded sm:h-20 sm:w-20 lg:h-24 lg:w-28"></div>
-      </div>
-      <div className="mt-8 flex justify-between">
-        <div className="flex flex-col">
-          <div className="shine h-16 w-28 rounded sm:w-32 lg:h-20 lg:w-40"></div>
-          <div className="shine mt-2 h-4 w-56 rounded-sm sm:w-96"></div>
+        <div className="shine mt-4 h-4 w-3/4 rounded-sm sm:w-[30rem]"></div>
+        <div className="shine mt-4 h-4 w-1/2 rounded-sm sm:w-80"></div>
+        <div className="mt-8 flex justify-between">
+          <div className="shine h-20 w-28 rounded sm:h-28 sm:w-40 lg:w-48"></div>
+          <div className="shine h-16 w-20 rounded sm:m-4 sm:h-24 sm:w-28"></div>
         </div>
-        <div className="shine h-14 w-16 rounded sm:h-20 sm:w-20 lg:h-24 lg:w-28"></div>
-      </div>
-      <div className="mt-8 flex justify-between">
-        <div className="flex flex-col">
-          <div className="shine h-16 w-28 rounded sm:w-32 lg:h-20 lg:w-40"></div>
-          <div className="shine mt-2 h-4 w-56 rounded-sm sm:w-96"></div>
+        <div className="shine mt-4 h-4 w-3/4 rounded-sm sm:w-[30rem]"></div>
+        <div className="shine mt-4 h-4 w-1/2 rounded-sm sm:w-80"></div>
+        <div className="mt-8 flex justify-between">
+          <div className="shine h-20 w-28 rounded sm:h-28 sm:w-40 lg:w-48"></div>
+          <div className="shine h-16 w-20 rounded sm:m-4 sm:h-24 sm:w-28"></div>
         </div>
-        <div className="shine h-14 w-16 rounded sm:h-20 sm:w-20 lg:h-24 lg:w-28"></div>
+        <div className="shine mt-4 h-4 w-3/4 rounded-sm sm:w-[30rem]"></div>
+        <div className="shine mt-4 h-4 w-1/2 rounded-sm sm:w-80"></div>
       </div>
-    </div>
+    </>
   );
 };
 export default RestaurantPageShimmer;

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectLocationState } from "../Utilities/AppSlice";
 import {
@@ -48,9 +48,9 @@ const Header = (props) => {
     >
       <div className="mx-auto flex h-full max-w-[1200px] items-center justify-between">
         <div className="flex items-center">
-          <Link to="/">
+          <NavLink to="/">
             <DefLogo classList={"h-[49px] w-[34px] fill-defColor"} />
-          </Link>
+          </NavLink>
           <div
             className="group ml-4 flex cursor-pointer gap-x-[3px] tracking-tighter lg:ml-8 lg:gap-x-2"
             onClick={props.toggle}
@@ -69,17 +69,25 @@ const Header = (props) => {
           </div>
         </div>
         <ul className="flex h-full items-center gap-x-2 font-semibold text-primary md:gap-x-6 lg:gap-x-14">
-          <Link to="search">
-            <li className="group flex items-center gap-x-1 md:gap-x-3">
-              <SearchBtn
-                classList={
-                  "h-[17px] w-[17px] fill-primary group-hover:fill-defColor"
-                }
-              />
-              <span className="group-hover:text-defColor ">Search</span>
-            </li>
-          </Link>
-          <Link>
+          <NavLink to="search">
+            {({ isActive }) => (
+              <li className="group flex items-center gap-x-1 md:gap-x-3">
+                <SearchBtn
+                  classList={`h-[17px] w-[17px] group-hover:fill-defColor ${
+                    isActive ? "fill-defColor" : "fill-primary"
+                  }`}
+                />
+                <span
+                  className={`group-hover:text-defColor ${
+                    isActive ? "text-defColor" : "text-primary"
+                  }`}
+                >
+                  Search
+                </span>
+              </li>
+            )}
+          </NavLink>
+          <NavLink>
             <li className="group flex items-center gap-x-1 md:gap-x-3">
               <OfferBtn
                 classList={
@@ -88,18 +96,26 @@ const Header = (props) => {
               />
               <span className="group-hover:text-defColor ">Offers </span>
             </li>
-          </Link>
-          <Link to="about">
-            <li className="group flex items-center gap-x-1 md:gap-x-3">
-              <AboutBtn
-                classList={
-                  "h-[19px] w-[19px] fill-primary group-hover:fill-defColor"
-                }
-              />
-              <span className="group-hover:text-defColor ">About</span>
-            </li>
-          </Link>
-          <Link to="#" onClick={props.toggleTwo}>
+          </NavLink>
+          <NavLink to="about">
+            {({ isActive }) => (
+              <li className="group flex items-center gap-x-1 md:gap-x-3">
+                <AboutBtn
+                  classList={`h-[19px] w-[19px] group-hover:fill-defColor  ${
+                    isActive ? "fill-defColor" : "fill-primary"
+                  }`}
+                />
+                <span
+                  className={`group-hover:text-defColor ${
+                    isActive ? "text-defColor" : "text-primary"
+                  }`}
+                >
+                  About
+                </span>
+              </li>
+            )}
+          </NavLink>
+          <NavLink to="#" onClick={props.toggleTwo}>
             <li className="group flex items-center gap-x-1 md:gap-x-3">
               <ProfileBtn
                 classList={
@@ -108,9 +124,9 @@ const Header = (props) => {
               />
               <span className="group-hover:text-defColor ">Login </span>
             </li>
-          </Link>
+          </NavLink>
           <li className="cartItem group relative flex h-full">
-            <Link to="cart" className="flex items-center gap-x-1 md:gap-x-3">
+            <NavLink to="cart" className="flex items-center gap-x-1 md:gap-x-3">
               <span className="relative">
                 <CartBtn
                   classList={
@@ -126,7 +142,7 @@ const Header = (props) => {
                 </span>
               </span>
               <span className="group-hover:text-defColor">Cart</span>
-            </Link>
+            </NavLink>
             <div className="cartMenu invisible absolute right-0 top-full z-[1] flex w-auto rounded-sm border-t-2 border-solid border-t-[#fc8019] bg-white px-7 py-6 opacity-0 shadow-[0_2px_20px_0_#93959f]">
               <span className="cartArrow"></span>
               {cartItems?.length == 0 ? (
@@ -158,11 +174,11 @@ const Header = (props) => {
                       <div className="-mt-px overflow-hidden text-ellipsis whitespace-nowrap text-xs font-light text-[#7e808c]">
                         {restInfo?.areaName}
                       </div>
-                      <Link to={"/restaurant/" + restInfo?.resId}>
+                      <NavLink to={"/restaurant/" + restInfo?.resId}>
                         <div className="mt-2 cursor-pointer text-xs font-semibold uppercase text-[#5d8ed5] hover:font-bold">
                           view full menu
                         </div>
-                      </Link>
+                      </NavLink>
                     </div>
                   </div>
                   <div className="max-h-[230px] min-h-[60px] overflow-y-auto border-b border-dashed border-b-[#a9abb2] px-0 pb-3 pt-4">
@@ -214,11 +230,11 @@ const Header = (props) => {
                       Extra charges may apply
                     </div>
                   </div>
-                  <Link to="/cart">
+                  <NavLink to="/cart">
                     <div className="mb-1 w-full translate-y-0 cursor-pointer bg-[#fc8019] p-2.5 text-center text-sm font-semibold uppercase text-white transition-transform duration-[0.8s] ease-[cubic-bezier(0.2,1,0.2,1)] hover:relative hover:shadow-[0_4px_14px_#d4d5d9]">
                       Checkout
                     </div>
-                  </Link>
+                  </NavLink>
                 </div>
               )}
             </div>
