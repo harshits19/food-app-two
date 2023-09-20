@@ -3,6 +3,10 @@ import {
   selectCarouselData,
   selectCarouselStatus,
 } from "../Utilities/HomePageSlice";
+import {
+  CAROUSEL_BANNER_URL,
+  CATEGORY_ITEMS_URL,
+} from "../Utilities/Constants";
 const Carousel = () => {
   const { carouselCards, categoryCards } = useSelector(selectCarouselData);
   const status = useSelector(selectCarouselStatus);
@@ -20,10 +24,7 @@ const Carousel = () => {
                   <div className="contents cursor-pointer" key={item?.imageId}>
                     <img
                       className="h-[200px] w-[300px] sm:h-[250px] sm:w-[425px]"
-                      src={
-                        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_850,h_504/" +
-                        item?.imageId
-                      }
+                      src={CAROUSEL_BANNER_URL + item?.imageId}
                     />
                   </div>
                 );
@@ -61,10 +62,7 @@ const Carousel = () => {
                   <div className="contents cursor-pointer" key={item?.imageId}>
                     <img
                       className="h-[180px] w-[144px]"
-                      src={
-                        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/" +
-                        item?.imageId
-                      }
+                      src={CATEGORY_ITEMS_URL + item?.imageId}
                     />
                   </div>
                 );

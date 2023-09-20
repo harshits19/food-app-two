@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
+import OffersBox from "./OffersBox";
 import { PieBtn, RupeeBtn } from "../Assets/SVG";
 import { AiFillStar } from "react-icons/ai";
-import OffersBox from "./OffersBox";
 import { BsArrowLeft } from "react-icons/bs";
 import { MdSearch } from "react-icons/md";
 

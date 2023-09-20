@@ -12,4 +12,18 @@ const filterItems = (data) => {
   });
   return filterData;
 };
-export { filterItems };
+const priceItemCalculator = (cartItems) => {
+  let totalItems = 0,
+    totalCost = 0;
+  cartItems.map((item) => {
+    totalCost +=
+      (item?.price
+        ? item?.price
+        : item?.finalPrice
+        ? item?.finalPrice
+        : item?.defaultPrice) * item?.qty;
+    totalItems += item?.qty;
+  });
+  return { totalCost, totalItems };
+};
+export { filterItems, priceItemCalculator };

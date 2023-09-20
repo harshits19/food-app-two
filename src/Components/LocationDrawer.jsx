@@ -6,6 +6,8 @@ import { addLocation } from "../Utilities/AppSlice";
 import { BsXLg } from "react-icons/bs";
 import { BiTargetLock } from "react-icons/bi";
 import { GoLocation } from "react-icons/go";
+import { FETCH_ADDRESS_URL } from "../Utilities/Constants";
+
 const debounce = (func, wait) => {
   let timeout;
   return (...args) => {
@@ -14,14 +16,12 @@ const debounce = (func, wait) => {
   };
 };
 const LocationDrawer = ({ open, toggle }) => {
-  const [searchData, setSearchData] = useState([]);
   const searchRef = useRef(null);
   const dispatch = useDispatch();
+  const [searchData, setSearchData] = useState([]);
 
-  const locateBySearch = async (placeid) => {
-    const res = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/misc/address-recommend?place_id=${placeid}`,
-    );
+  const fetchAddressBySearch = async (placeid) => {
+    const res = await fetch(`${FETCH_ADDRESS_URL}${placeid}`);
     const { data } = await res.json();
     const city = data[0]?.address_components?.filter(
       (item) => item?.types[0] === "city",
@@ -87,7 +87,7 @@ const LocationDrawer = ({ open, toggle }) => {
                       <button
                         key={item?.place_id}
                         className="group relative flex min-h-[40px] w-full cursor-pointer text-left font-normal text-[#535665]"
-                        onClick={() => locateBySearch(item?.place_id)}
+                        onClick={() => fetchAddressBySearch(item?.place_id)}
                       >
                         <span className="p-6 text-xl group-hover:text-defColor">
                           <GoLocation />

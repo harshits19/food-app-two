@@ -1,3 +1,9 @@
+import {
+  APP_STORE_ICON,
+  FOOTER_LOGO_URL,
+  PLAY_STORE_ICON,
+} from "../Utilities/Constants";
+
 const Footer = () => {
   return (
     <div
@@ -38,32 +44,23 @@ const Footer = () => {
               target="_blank"
               className="mb-[30px] block scale-x-100 will-change-transform"
             >
-              <img
-                alt=""
-                src="https://foodsimp.netlify.app/appStoreIcon.be7d6e09.png"
-              />
+              <img alt="" src={APP_STORE_ICON} />
             </a>
             <a
               href="#"
               target="_blank"
               className="mb-[30px] block scale-x-100 will-change-transform"
             >
-              <img
-                alt=""
-                src="https://foodsimp.netlify.app/playStoreIcon.8412b4d9.png"
-              />
+              <img alt="" src={PLAY_STORE_ICON} />
             </a>
           </div>
         </div>
         <div className="flex grow flex-col items-center gap-y-2 px-0 py-4 md:flex-row">
           <div className="w-[142px] fill-white">
-            <img
-              className="w-[130px] sm:w-[182px]"
-              src="https://foodsimp.netlify.app/logoFooter.b9007afe.png"
-            />
+            <img className="w-[130px] sm:w-[182px]" src={FOOTER_LOGO_URL} />
           </div>
           <div className="grow text-center text-xl tracking-[-0.6px]">
-            © 2023 FoodSimp
+            © 2023 FoodChimp
           </div>
           <div className="w-[180px]"></div>
         </div>

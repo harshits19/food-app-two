@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import Carousel from "../Components/Carousel";
 import DataCard from "../Components/DataCard";
-import { useSelector, useDispatch } from "react-redux";
 import { selectLocationState } from "../Utilities/AppSlice";
 import {
   selectRestCards,
@@ -11,6 +11,7 @@ import {
   updatePage,
   selectAvailStatus,
 } from "../Utilities/HomePageSlice";
+import { UNAVAIL_LOC_URL } from "../Utilities/Constants";
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -23,10 +24,7 @@ const HomePage = () => {
     return (
       <div className="flex h-screen w-full flex-col items-center justify-start">
         <div className="">
-          <img
-            src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_476,h_476/portal/m/location_unserviceable.png"
-            className="mt-24 h-64 w-56"
-          />
+          <img src={UNAVAIL_LOC_URL} className="mt-24 h-64 w-56" />
         </div>
         <div className="pt-8 text-center">
           <div className="text-xl font-bold text-defBlack">

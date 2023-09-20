@@ -1,24 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import RestaurantMenuNav from "./RestaurantMenuNav";
 import { selectCartItem } from "../Utilities/CartSlice";
 import { RiShoppingBag3Line } from "react-icons/ri";
 import { ImSpoonKnife } from "react-icons/im";
-import RestaurantMenuNav from "./RestaurantMenuNav";
+import { priceItemCalculator } from "../Hooks/useMisc";
 
 const RestaurantBottomSection = ({ data }) => {
   const cartItems = useSelector(selectCartItem);
-  let totalCost = 0,
-    totalItems = 0;
-  cartItems.map((item) => {
-    totalCost +=
-      (item?.price
-        ? item?.price
-        : item?.finalPrice
-        ? item?.finalPrice
-        : item?.defaultPrice) * item?.qty;
-    totalItems += item?.qty;
-  });
+  let { totalCost, totalItems } = priceItemCalculator(cartItems);
   var cartBottomMenu = document.getElementById("stickyBottomMenu");
   var restMenuBtnContainer = document.getElementById("restMenuBtnContainer");
   if (cartItems.length > 0) {
@@ -67,7 +58,6 @@ const RestaurantBottomSection = ({ data }) => {
           </Link>
         </div>
       </div>
-
       <RestaurantMenuNav
         open={menuNavState}
         toggle={menuNavToggleClickHandler}

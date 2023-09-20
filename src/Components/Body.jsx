@@ -6,6 +6,7 @@ import LocationDrawer from "./LocationDrawer";
 import SigninDrawer from "./SigninDrawer";
 import ShortHeader from "./ShortHeader";
 import UseTop from "../Hooks/useTop";
+import UseOnline from "../Hooks/useOnline";
 
 const Body = () => {
   const [locationDrawer, setLocationDrawer] = useState(false);
@@ -23,6 +24,7 @@ const Body = () => {
       <LocationDrawer open={locationDrawer} toggle={toggleOne} />
       <SigninDrawer openTwo={signinDrawer} toggleTwo={toggleTwo} />
       <Outlet />
+      <UseOnline />
       <UseTop />
       <Footer />
     </>

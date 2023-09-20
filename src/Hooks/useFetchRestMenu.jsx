@@ -1,6 +1,8 @@
+import { REST_MENU_URL } from "../Utilities/Constants";
+
 const useFetchRestMenu = async ({ resId, lat, long, setData }) => {
   const res = await fetch(
-    `https://corsproxy.io/?https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=${lat}&lng=${long}&restaurantId=${resId}`,
+    `${REST_MENU_URL}&lat=${lat}&lng=${long}&restaurantId=${resId}`,
   );
   const data = await res.json();
   setData({

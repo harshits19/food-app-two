@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectLocationState } from "../Utilities/AppSlice";
 import RestaurantInfo from "../Components/RestaurantInfo";
 import RestaurantMenu from "../Components/RestaurantMenu";
 import useFetchRestMenu from "../Hooks/useFetchRestMenu";
-import useTitle from "../Hooks/useTitle";
-import CartModal from "../Components/CartModal";
 import RestaurantBottomSection from "../Components/RestaurantBottomSection";
 import RestaurantPageShimmer from "../Components/RestaurantPageShimmer";
+import CartModal from "../Components/CartModal";
+import useTitle from "../Hooks/useTitle";
+import { selectLocationState } from "../Utilities/AppSlice";
 
 const RestaurantPage = () => {
   const { resId } = useParams();

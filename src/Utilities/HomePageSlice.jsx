@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { FETCH_HOME_DATA_URL, FETCH_MORE_DATA_URL } from "./Constants";
 
 const initialState = {
   cards: { carouselCards: [], categoryCards: [], status: "idle" },
@@ -12,9 +13,7 @@ const initialState = {
 export const fetchData = createAsyncThunk(
   "HomeData/fetchData",
   async ({ lat, long }) => {
-    const res = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/v5?lat=${lat}&lng=${long}`,
-    );
+    const res = await fetch(`${FETCH_HOME_DATA_URL}lat=${lat}&lng=${long}`);
     const data = await res.json();
     return data;
   },
@@ -23,32 +22,29 @@ export const fetchData = createAsyncThunk(
 export const fetchMoreData = createAsyncThunk(
   "HomeData/fetchMoreData",
   async ({ lat, long, page }) => {
-    const response = await fetch(
-      "https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/list/update",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          lat: lat,
-          lng: long,
-          nextOffset: "COVCELQ4KIDoiofsxaDvBjCnEzgE",
-          seoParams: {
-            apiName: "FoodHomePage",
-            pageType: "FOOD_HOMEPAGE",
-            seoUrl: "https://www.swiggy.com/",
-          },
-          widgetOffset: {
-            NewListingView_Topical_Fullbleed: "",
-            NewListingView_category_bar_chicletranking_TwoRows: "",
-            NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
-            collectionV5RestaurantListWidget_SimRestoRelevance_food_seo:
-              String(page),
-          },
-        }),
+    const response = await fetch(FETCH_MORE_DATA_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        lat: lat,
+        lng: long,
+        nextOffset: "COVCELQ4KIDoiofsxaDvBjCnEzgE",
+        seoParams: {
+          apiName: "FoodHomePage",
+          pageType: "FOOD_HOMEPAGE",
+          seoUrl: "https://www.swiggy.com/",
+        },
+        widgetOffset: {
+          NewListingView_Topical_Fullbleed: "",
+          NewListingView_category_bar_chicletranking_TwoRows: "",
+          NewListingView_category_bar_chicletranking_TwoRows_Rendition: "",
+          collectionV5RestaurantListWidget_SimRestoRelevance_food_seo:
+            String(page),
+        },
+      }),
+    });
     const data = await response.json();
     return data;
   },

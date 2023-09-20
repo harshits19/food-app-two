@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Accordion from "./MenuAccordion";
 import { BiSolidLeaf } from "react-icons/bi";
+import { TOP_PICKS_ITEM_URL } from "../Utilities/Constants";
 
 const VegSection = ({ data, isVeg, setIsVeg }) => {
   return data?.isPureVeg ? (
@@ -26,10 +27,7 @@ const TopPicksMenu = ({ data }) => {
         {data?.carousel?.map((item) => {
           return (
             <img
-              src={
-                "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_628,h_704/" +
-                item?.creativeId
-              }
+              src={TOP_PICKS_ITEM_URL + item?.creativeId}
               key={item?.bannerId}
               className="h-[270px] w-[240px] rounded-[20px] md:h-[337px] md:w-[300px]"
             />

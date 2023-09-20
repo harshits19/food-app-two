@@ -2,6 +2,11 @@ import { useMemo } from "react";
 import { BiRupee } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import { addItem, removeItem, selectCartItem } from "../Utilities/CartSlice";
+import {
+  DEF_IMG_URL,
+  NONVEG_ICON_URL,
+  VEG_ICON_URL,
+} from "../Utilities/Constants";
 
 const ItemBox = ({ data, restInfo }) => {
   const dispatch = useDispatch();
@@ -16,15 +21,9 @@ const ItemBox = ({ data, restInfo }) => {
       <div className="md:w-[80%]">
         <div>
           {data?.info?.isVeg ? (
-            <img
-              className="h-5 w-5"
-              src="https://foodsimp.netlify.app/vegFoodIcon.47b449ec.png"
-            />
+            <img className="h-5 w-5" src={VEG_ICON_URL} />
           ) : (
-            <img
-              className="h-5 w-5"
-              src="https://foodsimp.netlify.app/nonVegFoodIcon.7b3936e7.png"
-            />
+            <img className="h-5 w-5" src={NONVEG_ICON_URL} />
           )}
         </div>
         <div className="break-words text-base font-medium text-[#3e4152]">
@@ -32,11 +31,11 @@ const ItemBox = ({ data, restInfo }) => {
         </div>
         <div className="mt-[2px] flex items-center text-sm font-normal text-[#3e4152]">
           <BiRupee />
-          {data?.info?.price
-            ? data?.info?.price / 100
+          {(data?.info?.price
+            ? data?.info?.price
             : data?.info?.finalPrice
-            ? data?.info?.finalPrice / 100
-            : data?.info?.defaultPrice / 100}
+            ? data?.info?.finalPrice
+            : data?.info?.defaultPrice) / 100}
         </div>
         <div className=" mt-2 w-[98%] text-sm leading-[1.3] tracking-tighter text-[#282c3f73]">
           {data?.info?.description}
@@ -46,10 +45,7 @@ const ItemBox = ({ data, restInfo }) => {
         {data?.info?.imageId && (
           <img
             className="mb-[-30px] h-[96px] min-h-[96px] w-[118px] min-w-[118px] rounded-md"
-            src={
-              "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
-              data?.info?.imageId
-            }
+            src={DEF_IMG_URL + data?.info?.imageId}
           />
         )}
         {!currentItem ? (

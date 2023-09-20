@@ -7,6 +7,7 @@ import { addLocation } from "../Utilities/AppSlice";
 import useSearchLocation from "../Hooks/useSearchLocation";
 import useCurrentLocation from "../Hooks/useCurrentLocation";
 import Footer from "../Components/Footer";
+import { FETCH_ADDRESS_URL, LP_IMG_SET } from "../Utilities/Constants";
 
 const debounce = (func, wait) => {
   let timeout;
@@ -21,10 +22,8 @@ const LandingPage = () => {
   const searchRef = useRef(null);
   const [searchData, setSearchData] = useState([]);
 
-  const locateBySearch = async (placeid) => {
-    const res = await fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/misc/address-recommend?place_id=${placeid}`,
-    );
+  const fetchAddressBySearch = async (placeid) => {
+    const res = await fetch(`${FETCH_ADDRESS_URL}${placeid}`);
     const { data } = await res.json();
     const city = data[0]?.address_components?.filter(
       (item) => item?.types[0] === "city",
@@ -98,7 +97,7 @@ const LandingPage = () => {
                         <button
                           key={item?.place_id}
                           className="group relative flex min-h-[40px] w-full cursor-pointer text-left font-normal text-[#535665]"
-                          onClick={() => locateBySearch(item?.place_id)}
+                          onClick={() => fetchAddressBySearch(item?.place_id)}
                         >
                           <span className="p-6 text-xl group-hover:text-defColor">
                             <GoLocation />
@@ -137,10 +136,7 @@ const LandingPage = () => {
       <section className="flex h-full w-full flex-col justify-evenly bg-[#2b1e16] px-16 pb-16 text-white md:flex-row">
         <div className="text-center">
           <div className="flex h-full justify-center md:h-[250px]">
-            <img
-              className="h-[200px]"
-              src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_210,h_398/4x_-_No_min_order_x0bxuf"
-            />
+            <img className="h-[200px]" src={LP_IMG_SET[0]} />
           </div>
           <h2 className="text-xl font-semibold">No Minimum Order</h2>
           <p className="mt-2 text-sm text-[#e0cbc1]">
@@ -152,10 +148,7 @@ const LandingPage = () => {
         </div>
         <div className="text-center">
           <div className="flex h-full justify-center md:h-[250px]">
-            <img
-              className="h-[200px]"
-              src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_224,h_412/4x_Live_order_zzotwy"
-            />
+            <img className="h-[200px]" src={LP_IMG_SET[1]} />
           </div>
           <h2 className="text-xl font-semibold">Live Order Tracking</h2>
           <p className="mt-2 text-sm text-[#e0cbc1]">
@@ -167,10 +160,7 @@ const LandingPage = () => {
         </div>
         <div className="text-center">
           <div className="flex h-full justify-center md:h-[250px]">
-            <img
-              className="h-[200px]"
-              src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_248,h_376/4x_-_Super_fast_delivery_awv7sn"
-            />
+            <img className="h-[200px]" src={LP_IMG_SET[2]} />
           </div>
           <h2 className="text-xl font-semibold">Lightning-Fast Delivery</h2>
           <p className="mt-2 text-sm text-[#e0cbc1]">

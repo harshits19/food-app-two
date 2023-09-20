@@ -1,3 +1,5 @@
+import { DP_URL, SOCIAL_ICONS_SET } from "../Utilities/Constants";
+
 const AboutPage = () => {
   return (
     <div className="w-full bg-[#e9ecee] px-4 pt-12">
@@ -10,7 +12,7 @@ const AboutPage = () => {
       <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center gap-4 py-8 md:flex-row ">
         <div className="">
           <img
-            src="https://foodsimp.netlify.app/dp.87514181.jpg"
+            src={DP_URL}
             className="h-[250px] w-[250px] rounded-full lg:h-[350px] lg:w-[350px]"
           ></img>
         </div>
@@ -38,13 +40,13 @@ const AboutPage = () => {
         Connect with me on :
         <div className="flex">
           <a href="https://linkedin.com/in/harshitgaur19" target="_blank">
-            <img src="https://foodsimp.netlify.app/linkedinIcon.13493839.png" />
+            <img src={SOCIAL_ICONS_SET.linkedIn} />
           </a>
           <a href="https://instagram.com/_harshitz" target="_blank">
-            <img src="https://foodsimp.netlify.app/instaIcon.faad7e9a.png" />
+            <img src={SOCIAL_ICONS_SET.insta} />
           </a>
           <a href="mailto::gaurharshit4@gmail.com" target="_blank">
-            <img src="https://foodsimp.netlify.app/gmailIcon.0c7fa5a8.png" />
+            <img src={SOCIAL_ICONS_SET.gmail} />
           </a>
         </div>
       </div>

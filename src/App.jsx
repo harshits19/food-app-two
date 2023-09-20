@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Body from "./Components/Body";
 import RestaurantPage from "./Pages/RestaurantPage";
 import SearchPage from "./Pages/SearchPage";
@@ -6,11 +7,10 @@ import CartPage from "./Pages/CartPage";
 import LandingPage from "./Pages/LandingPage";
 import HomePage from "./Pages/HomePage";
 import AboutPage from "./Pages/AboutPage";
+import RestaurantSearch from "./Components/RestaurantSearch";
 import store from "./Utilities/store";
-import { useSelector } from "react-redux";
 import { selectLocationState } from "./Utilities/AppSlice";
 import { fetchData } from "./Utilities/HomePageSlice";
-import RestaurantSearch from "./Components/RestaurantSearch";
 
 function App() {
   const userLocation = useSelector(selectLocationState);
@@ -29,6 +29,7 @@ function App() {
           <Route path="search" element={<SearchPage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       ) : (
         <Route index path="/" element={<LandingPage />} />

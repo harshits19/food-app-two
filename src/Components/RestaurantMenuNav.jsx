@@ -9,15 +9,15 @@ const RestaurantMenuNav = ({ data, open, toggle }) => {
     document.body?.classList?.remove("menuOpen");
   }
   var allRestaurants = [];
-  data?.map((items) =>
-    allRestaurants.push({
-      title: items.card.card.title,
-      qty:
-        items?.card?.card?.itemCards?.length ||
-        items?.card?.card?.categories?.length,
-    }),
-  );
-  allRestaurants = allRestaurants.filter((x) => x.title !== undefined);
+  data?.map((items) => {
+    if (items?.card?.card?.title)
+      allRestaurants.push({
+        title: items?.card?.card?.title,
+        qty:
+          items?.card?.card?.itemCards?.length ||
+          items?.card?.card?.categories?.length,
+      });
+  });
 
   return (
     <>

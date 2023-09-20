@@ -1,86 +1,34 @@
 import { useState, useEffect, useMemo } from "react";
-import { Link } from "react-router-dom";
+import SearchCard from "../Components/SearchCards";
+import useFetchSearchData from "../Hooks/useFetchSearchData";
 import useTitle from "../Hooks/useTitle";
 import { SlMagnifier } from "react-icons/sl";
 import { BsXLg } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { selectLocationState } from "../Utilities/AppSlice";
-
-const SearchCard = ({ data }) => {
-  let resId = "";
-  return (
-    <div>
-      {data?.map((restaurants) => {
-        let url = JSON.parse(restaurants?.metadata)?.data?.primaryRestaurantId;
-        if (url) resId = `/restaurant/${url}`;
-        return (
-          <Link to={resId} key={restaurants?.metadata}>
-            <div className="flex h-full w-full items-center gap-x-2 rounded p-2 hover:bg-gray-100 ">
-              <div className="h-16 w-16">
-                <img
-                  className="h-full w-full rounded-md"
-                  src={
-                    "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
-                    restaurants?.cloudinaryId
-                  }
-                />
-              </div>
-              <div className="text-sm text-defBlack no-underline">
-                <p>{restaurants?.text}</p>
-                <p className="text-xs text-[#7e808c]">
-                  {restaurants?.tagToDisplay}
-                </p>
-              </div>
-            </div>
-          </Link>
-        );
-      })}
-    </div>
-  );
-};
+import { DEF_IMG_URL, SEARCH_SHIMMER_SET } from "../Utilities/Constants";
 
 const SearchPage = () => {
   const userLocation = useSelector(selectLocationState);
   const [searchText, setSearchText] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
-  const searchData = [
-    "rng/md/carousel/production/b4ff78ecc5b8b66f732dd06228916d65",
-    "rng/md/carousel/production/3df4fca020027e89b89c733cdffc4966",
-    "rng/md/carousel/production/5dd234f7decdac4b4f71a2ff1408e10f",
-    "rng/md/carousel/production/87664acb0f9dd95d10a549bb8190ab27",
-    "rng/md/carousel/production/e76b511935016406e6ebc11dd7593387",
-    "rng/md/carousel/production/89f3fec702aef5acbb51a6cbc284b3f7",
-    "rng/md/carousel/production/8322f6d6df488dc1f5a6674cfe863f0f",
-    "rng/md/carousel/production/31f03222ea978aef3b10d386729eb076",
-    "rng/md/carousel/production/c170aa4262ec0d191642f42a3a03b4ce",
-    "rng/md/carousel/production/0b5ffa32a04d99c1f212d2aacefd5f6f",
-  ];
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (searchText.length > 1) fetchRestaurantsAPI(searchText);
+      if (searchText.length > 1)
+        useFetchSearchData(searchText, userLocation, setAllRestaurants);
     }, 300);
     return () => clearTimeout(timer);
   }, [searchText]);
 
-  const fetchRestaurantsAPI = async (searchText) => {
-    fetch(
-      `https://corsproxy.io/?https://www.swiggy.com/dapi/restaurants/search/suggest?lat=${userLocation?.lat}&lng=${userLocation?.long}&str=${searchText}`,
-    )
-      .then((res) => res.json())
-      .then((data) => setAllRestaurants(data?.data?.suggestions))
-      .catch((err) => console.log(err));
-  };
   const preSearchShimmer = useMemo(
     () =>
-      searchData.map((imageId) => {
+      SEARCH_SHIMMER_SET?.map((imageId) => {
         return (
           <img
             className="h-[100px] w-[85px]"
-            src={
-              "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
-              imageId
-            }
+            src={DEF_IMG_URL + imageId}
             key={imageId}
           />
         );

@@ -1,4 +1,5 @@
 import { BsXLg } from "react-icons/bs";
+import { LOGIN_ICON_URL } from "../Utilities/Constants";
 
 const SigninDrawer = ({ openTwo, toggleTwo }) => {
   let drawerClasses =
@@ -28,10 +29,7 @@ const SigninDrawer = ({ openTwo, toggleTwo }) => {
             <div className="loginHeading">Login</div>
             <div className="loginDesc">or create an account</div>
             <div className="loginBorder"></div>
-            <img
-              className="loginIcon"
-              src="https://foodsimp.netlify.app/loginDrawerIcon.fe3b839f.png"
-            />
+            <img className="loginIcon" src={LOGIN_ICON_URL} />
           </div>
           <div className="drawerLoginBody">
             <div className="drawerLoginInput">

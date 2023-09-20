@@ -2,17 +2,15 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCartItem } from "../Utilities/CartSlice";
 import { selectLocationState } from "../Utilities/AppSlice";
+import { priceItemCalculator } from "../Hooks/useMisc";
 import { DefLogo, SearchBtn, ProfileBtn, CartBtn } from "../Assets/SVG";
 import { BiChevronDown } from "react-icons/bi";
 import { MdOutlineLocationOn } from "react-icons/md";
+
 const ShortHeader = ({ toggle, toggleTwo }) => {
   const location = useSelector(selectLocationState);
   const cartItems = useSelector(selectCartItem);
-
-  let totalItems = 0;
-  cartItems.map((item) => {
-    totalItems += item?.qty;
-  });
+  let { totalItems } = priceItemCalculator(cartItems);
 
   return (
     <>

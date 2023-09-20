@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectLocationState } from "../Utilities/AppSlice";
+import { selectCartItem, selectRestInfo } from "../Utilities/CartSlice";
 import {
   DefLogo,
   SearchBtn,
@@ -10,22 +11,18 @@ import {
   AboutBtn,
 } from "../Assets/SVG";
 import { BiChevronDown } from "react-icons/bi";
-import { selectCartItem, selectRestInfo } from "../Utilities/CartSlice";
+import { priceItemCalculator } from "../Hooks/useMisc";
+import {
+  DEF_IMG_URL,
+  NONVEG_ICON_URL,
+  VEG_ICON_URL,
+} from "../Utilities/Constants";
+
 const Header = (props) => {
   const location = useSelector(selectLocationState);
   const cartItems = useSelector(selectCartItem);
   const restInfo = useSelector(selectRestInfo);
-  let totalCost = 0,
-    totalItems = 0;
-  cartItems.map((item) => {
-    totalCost +=
-      (item?.price
-        ? item?.price
-        : item?.finalPrice
-        ? item?.finalPrice
-        : item?.defaultPrice) * item?.qty;
-    totalItems += item?.qty;
-  });
+  const { totalCost, totalItems } = priceItemCalculator(cartItems);
 
   var cartButton = document.getElementById("cartNavBtn");
   var cartCounter = document.getElementById("cartCounter");
@@ -161,10 +158,7 @@ const Header = (props) => {
                     <div className="relative float-left h-[66px] w-[66px] cursor-pointer overflow-hidden">
                       <img
                         className="h-[66px] w-[66px] object-cover"
-                        src={
-                          "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
-                          restInfo?.dp
-                        }
+                        src={DEF_IMG_URL + restInfo?.dp}
                       />
                     </div>
                     <div className="ml-20 h-[66px] overflow-hidden pr-[30px] after:absolute after:bottom-0 after:left-0 after:right-[-30px] after:border-b after:border-b-[#d4d5d9] after:content-['']">
@@ -189,14 +183,11 @@ const Header = (props) => {
                           key={item.id}
                         >
                           {item?.isVeg ? (
-                            <img
-                              className="mr-2 h-4 w-4"
-                              src="https://foodsimp.netlify.app/vegFoodIcon.47b449ec.png"
-                            />
+                            <img className="mr-2 h-4 w-4" src={VEG_ICON_URL} />
                           ) : (
                             <img
                               className="mr-2 h-4 w-4"
-                              src="https://foodsimp.netlify.app/nonVegFoodIcon.7b3936e7.png"
+                              src={NONVEG_ICON_URL}
                             />
                           )}
                           <div className="flex-1 overflow-hidden text-ellipsis whitespace-nowrap text-xs font-medium text-[#3d4152]">
@@ -206,11 +197,11 @@ const Header = (props) => {
                           </div>
                           <div className="w-[60px] text-right text-xs font-light text-[#686b78]">
                             {"₹ "}
-                            {item?.price
-                              ? item?.price / 100
+                            {(item?.price
+                              ? item?.price
                               : item?.finalPrice
-                              ? item?.finalPrice / 100
-                              : item?.defaultPrice / 100}
+                              ? item?.finalPrice
+                              : item?.defaultPrice) / 100}
                           </div>
                         </div>
                       );

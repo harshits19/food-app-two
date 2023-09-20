@@ -6,23 +6,18 @@ import {
   addItem,
   removeItem,
 } from "../Utilities/CartSlice";
+import {
+  DEF_IMG_URL,
+  NONVEG_ICON_URL,
+  VEG_ICON_URL,
+} from "../Utilities/Constants";
+import { priceItemCalculator } from "../Hooks/useMisc";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(selectCartItem);
   const restDetails = useSelector(selectRestInfo);
-  let totalCost = 0,
-    totalItems = 0;
-
-  cartItems.map((item) => {
-    totalCost +=
-      (item?.price
-        ? item?.price
-        : item?.finalPrice
-        ? item?.finalPrice
-        : item?.defaultPrice) * item?.qty;
-    totalItems += item?.qty;
-  });
+  let { totalCost } = priceItemCalculator(cartItems);
   function myFunction() {
     var checkBox = document.getElementById("myCheck");
     var text = document.getElementById("hiddenText");
@@ -59,11 +54,8 @@ const CartPage = () => {
                 <button className="cartRestroDetails">
                   <span className="cartRestroImgBox">
                     <img
-                      className="cartRestroImg h-[50px] w-[50px]"
-                      src={
-                        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
-                        restDetails?.dp
-                      }
+                      className="cartRestroImg h-[50px] w-[50px] object-cover"
+                      src={DEF_IMG_URL + restDetails?.dp}
                     />
                   </span>
                   <span className="cartRestroDesc">
@@ -84,14 +76,11 @@ const CartPage = () => {
                             <div className="cartItemInner">
                               <div className="cartItemName">
                                 {item?.isVeg ? (
-                                  <img
-                                    className="h-4 w-4"
-                                    src="https://foodsimp.netlify.app/vegFoodIcon.47b449ec.png"
-                                  />
+                                  <img className="h-4 w-4" src={VEG_ICON_URL} />
                                 ) : (
                                   <img
                                     className="h-4 w-4"
-                                    src="https://foodsimp.netlify.app/nonVegFoodIcon.7b3936e7.png"
+                                    src={NONVEG_ICON_URL}
                                   />
                                 )}
                                 <div>{item?.name}</div>

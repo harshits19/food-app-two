@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import ItemBox from "./ItemBox";
+import { filterItems } from "../Hooks/useMisc";
 import { SlMagnifier } from "react-icons/sl";
 import { BsArrowLeft, BsXLg } from "react-icons/bs";
-import { filterItems } from "../Hooks/useMisc";
 
 const RestaurantSearch = () => {
   const { state } = useLocation();
-  const [searchText, setSearchText] = useState("");
   const inputRef = useRef();
+  const [searchText, setSearchText] = useState("");
   const [isSearched, setIsSearched] = useState(false);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const unfilteredData = filterItems(state[0]);

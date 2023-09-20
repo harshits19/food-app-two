@@ -1,4 +1,5 @@
 import { MdStars } from "react-icons/md";
+import { DATA_CARD_IMG_URL } from "../Utilities/Constants";
 const DataCard = ({ item }) => {
   return (
     <div className="flex h-full w-full grid-flow-row justify-stretch duration-100 sm:grid sm:hover:scale-95">
@@ -6,10 +7,7 @@ const DataCard = ({ item }) => {
         <div className="h-28 w-28 sm:h-full sm:w-full">
           <img
             className="h-28 w-28 rounded-2xl object-cover sm:h-full sm:max-h-[170px] sm:min-h-[130px] sm:w-full"
-            src={
-              "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
-              item?.info?.cloudinaryImageId
-            }
+            src={DATA_CARD_IMG_URL + item?.info?.cloudinaryImageId}
           />
         </div>
         <div className="absolute inset-0 hidden h-full w-full content-end rounded-2xl bg-[linear-gradient(rgba(27,30,36,0)_0%,rgb(27,30,36)_84.21%)] p-2 text-left drop-shadow-dataCardFilter sm:grid">
