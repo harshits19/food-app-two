@@ -4,14 +4,14 @@ import { BiSolidLeaf } from "react-icons/bi";
 
 const VegSection = ({ data, isVeg, setIsVeg }) => {
   return data?.isPureVeg ? (
-    <div className="flex text-xs gap-x-2 font-semibold text-[#3d4152] items-center pb-4 border-b-[0.5px] border-b-[#d3d3d3]">
-      <BiSolidLeaf className="text-green-600 text-xl" />
+    <div className="flex items-center gap-x-2 border-b-[0.5px] border-b-[#d3d3d3] pb-4 text-xs font-semibold text-[#3d4152]">
+      <BiSolidLeaf className="text-xl text-green-600" />
       PURE VEG
     </div>
   ) : (
-    <div className="flex text-sm gap-x-2 font-bold text-[#3d4152] items-center pb-4 border-b-[0.5px] border-b-[#d3d3d3]">
+    <div className="flex items-center gap-x-2 border-b-[0.5px] border-b-[#d3d3d3] pb-4 text-sm font-bold text-[#3d4152]">
       Veg Only
-      <label className="switch w-[35px] h-[17px] inline-block relative">
+      <label className="switch relative inline-block h-[17px] w-[35px]">
         <input type="checkbox" />
         <span className="slider" onClick={() => setIsVeg(!isVeg)}></span>
       </label>
@@ -21,8 +21,8 @@ const VegSection = ({ data, isVeg, setIsVeg }) => {
 const TopPicksMenu = ({ data }) => {
   return (
     <div className="border-b-8 border-b-[#f1f1f6] pb-8">
-      <div className="text-lg font-bold text-[#3e4152] py-4">{data?.title}</div>
-      <div className="topPicks flex overflow-x-auto overflow-y-hidden gap-x-5">
+      <div className="py-4 text-lg font-bold text-[#3e4152]">{data?.title}</div>
+      <div className="topPicks flex gap-x-5 overflow-y-hidden overflow-x-scroll">
         {data?.carousel?.map((item) => {
           return (
             <img
@@ -31,7 +31,7 @@ const TopPicksMenu = ({ data }) => {
                 item?.creativeId
               }
               key={item?.bannerId}
-              className="h-[337px] w-[300px] rounded-[20px]"
+              className="h-[270px] w-[240px] rounded-[20px] md:h-[337px] md:w-[300px]"
             />
           );
         })}

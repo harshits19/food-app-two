@@ -13,7 +13,7 @@ const ItemBox = ({ data, restInfo }) => {
 
   return (
     <div className="mx-0 my-5 flex justify-between border-b-[0.5px] border-b-[#d3d3d3] px-0 pb-5 pt-0">
-      <div className="w-[70%] sm:w-[80%]">
+      <div className="md:w-[80%]">
         <div>
           {data?.info?.isVeg ? (
             <img
@@ -42,10 +42,10 @@ const ItemBox = ({ data, restInfo }) => {
           {data?.info?.description}
         </div>
       </div>
-      <div className="flex  flex-col items-center justify-center">
+      <div className="flex  flex-col items-center justify-center md:w-[20%]">
         {data?.info?.imageId && (
           <img
-            className="mb-[-30px] h-[96px] w-[118px] rounded-md"
+            className="mb-[-30px] h-[96px] min-h-[96px] w-[118px] min-w-[118px] rounded-md"
             src={
               "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/" +
               data?.info?.imageId

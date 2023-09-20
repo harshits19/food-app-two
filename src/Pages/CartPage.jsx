@@ -85,12 +85,12 @@ const CartPage = () => {
                               <div className="cartItemName">
                                 {item?.isVeg ? (
                                   <img
-                                    className="h-5 w-5"
+                                    className="h-4 w-4"
                                     src="https://foodsimp.netlify.app/vegFoodIcon.47b449ec.png"
                                   />
                                 ) : (
                                   <img
-                                    className="h-5 w-5"
+                                    className="h-4 w-4"
                                     src="https://foodsimp.netlify.app/nonVegFoodIcon.7b3936e7.png"
                                   />
                                 )}
@@ -175,20 +175,23 @@ const CartPage = () => {
                   </div>
                   <div className="costnDelSection">
                     <div className="">
-                      Delivery Fee | {restDetails?.distance}
+                      Delivery Fee |{" "}
+                      {restDetails?.distance ? restDetails?.distance : "1 Km"}
                     </div>
                     <div>
                       {"₹"}
-                      {restDetails?.delFees / 100}
+                      {restDetails?.delFees
+                        ? restDetails?.delFees / 100
+                        : Number(30)}
                     </div>
                   </div>
-                  <div className="otherCharges"></div>
-
                   <div className="costnDelSection">
                     <div className="">Govt Taxes & Other Charges</div>
                     <div>
                       {"₹"}
-                      {restDetails?.delFees / 200}
+                      {restDetails?.delFees
+                        ? restDetails?.delFees / 200
+                        : Number(15)}
                     </div>
                   </div>
                 </div>
@@ -199,7 +202,14 @@ const CartPage = () => {
                   <div>TO PAY</div>
                   <div>
                     {"₹"}
-                    {Math.round((totalCost + restDetails?.delFees * 1.5) / 100)}
+                    {Math.round(
+                      (totalCost +
+                        (restDetails?.delFees
+                          ? restDetails?.delFees
+                          : Number(30)) *
+                          1.5) /
+                        100,
+                    )}
                   </div>
                 </div>
               </div>

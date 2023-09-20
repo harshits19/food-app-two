@@ -56,7 +56,7 @@ const Header = (props) => {
             onClick={props.toggle}
           >
             <span className="text-sm font-bold text-defBlack group-hover:text-defColor">
-              {location.city}
+              {location?.city}
             </span>
             <span className="hidden md:contents">
               <span className="textEllipse  w-[8rem] overflow-hidden text-ellipsis break-words text-defGray lg:w-full lg:max-w-[14rem]">
@@ -79,7 +79,7 @@ const Header = (props) => {
               <span className="group-hover:text-defColor ">Search</span>
             </li>
           </Link>
-          <Link to="offers">
+          <Link>
             <li className="group flex items-center gap-x-1 md:gap-x-3">
               <OfferBtn
                 classList={

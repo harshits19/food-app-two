@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectLocationState } from "../Utilities/AppSlice";
 import RestaurantInfo from "../Components/RestaurantInfo";
 import RestaurantMenu from "../Components/RestaurantMenu";
 import useFetchRestMenu from "../Hooks/useFetchRestMenu";
-import UseTop from "../Hooks/useTop";
+import useTitle from "../Hooks/useTitle";
 import CartModal from "../Components/CartModal";
 import RestaurantBottomSection from "../Components/RestaurantBottomSection";
+import RestaurantPageShimmer from "../Components/RestaurantPageShimmer";
+import { fetchRestaurantData } from "../Utilities/RestSlice";
 
 const RestaurantPage = () => {
   const { resId } = useParams();
+  const dispatch = useDispatch();
   const userLocation = useSelector(selectLocationState);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -20,12 +23,31 @@ const RestaurantPage = () => {
       resId: resId,
       setData: setData,
     });
+    dispatch(
+      fetchRestaurantData({
+        lat: userLocation?.lat,
+        long: userLocation?.long,
+        resId: resId,
+      }),
+    );
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
     document.getElementById("header").style.position = "inherit";
-    return () => (document.getElementById("header").style.position = "sticky");
+    if (mediaQuery.matches) {
+      document.getElementById("mobileNav").style.display = "none";
+      document.getElementById("shortHeader").style.display = "none";
+    }
+    return () => {
+      document.getElementById("header").style.position = "sticky";
+      if (mediaQuery.matches) {
+        document.getElementById("mobileNav").style.display = "block";
+        document.getElementById("shortHeader").style.display = "block";
+      }
+    };
   }, []);
-  return data ? (
+  useTitle(data?.info?.name && data.info.name + " | Order Online");
+  return data?.info ? (
     <>
-      <div className="mx-auto my-5 flex min-h-[800px] max-w-[800px] flex-col px-4">
+      <div className="mx-auto my-2 flex min-h-[800px] max-w-[800px] flex-col md:my-5 md:px-4">
         <RestaurantInfo data={data?.info} offers={data?.offers} />
         <div className="h-full w-full px-4 py-8">
           <RestaurantMenu
@@ -42,11 +64,12 @@ const RestaurantPage = () => {
           <RestaurantBottomSection data={data?.restList} />
         </div>
       </div>
-      <UseTop />
       <CartModal />
     </>
   ) : (
-    <></>
+    <>
+      <RestaurantPageShimmer />
+    </>
   );
 };
 export default RestaurantPage;

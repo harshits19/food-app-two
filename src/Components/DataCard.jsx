@@ -1,7 +1,7 @@
 import { MdStars } from "react-icons/md";
 const DataCard = ({ item }) => {
   return (
-    <div className="flex h-full w-full grid-flow-row justify-stretch duration-100 hover:scale-95 sm:grid">
+    <div className="flex h-full w-full grid-flow-row justify-stretch duration-100 sm:grid sm:hover:scale-95">
       <div className="relative">
         <div className="h-28 w-28 sm:h-full sm:w-full">
           <img
@@ -13,11 +13,16 @@ const DataCard = ({ item }) => {
           />
         </div>
         <div className="absolute inset-0 hidden h-full w-full content-end rounded-2xl bg-[linear-gradient(rgba(27,30,36,0)_0%,rgb(27,30,36)_84.21%)] p-2 text-left drop-shadow-dataCardFilter sm:grid">
-          {item?.info?.aggregatedDiscountInfoV3?.subHeader && (
+          {item?.info?.aggregatedDiscountInfoV3?.header ? (
             <div className="textEllipse w-full overflow-hidden text-ellipsis break-words text-xl font-extrabold text-[#ffffffeb]">
               {item?.info?.aggregatedDiscountInfoV3?.header +
                 " " +
                 item?.info?.aggregatedDiscountInfoV3?.subHeader}
+            </div>
+          ) : (
+            <div className="textEllipse w-full overflow-hidden text-ellipsis break-words text-xl font-extrabold text-[#ffffffeb]">
+              {item?.info?.aggregatedDiscountInfoV2?.header &&
+                item?.info?.aggregatedDiscountInfoV2?.header}
             </div>
           )}
         </div>

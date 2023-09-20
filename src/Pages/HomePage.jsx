@@ -55,10 +55,10 @@ const HomePage = () => {
           })}
           {status === "loading" && (
             <>
-              <div className="shine h-[170px] w-full rounded-2xl"></div>
-              <div className="shine h-[170px] w-full rounded-2xl"></div>
-              <div className="shine h-[170px] w-full rounded-2xl"></div>
-              <div className="shine h-[170px] w-full rounded-2xl"></div>
+              <div className="shine h-[120px] w-full rounded-2xl md:h-[170px]"></div>
+              <div className="shine h-[120px] w-full rounded-2xl md:h-[170px]"></div>
+              <div className="shine h-[120px] w-full rounded-2xl md:h-[170px]"></div>
+              <div className="shine h-[120px] w-full rounded-2xl md:h-[170px]"></div>
             </>
           )}
         </div>

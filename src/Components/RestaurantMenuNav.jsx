@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 const RestaurantMenuNav = ({ data, open, toggle }) => {
   let menuNavClasses = "menu-drawer";
   let backdrop;
@@ -11,15 +9,14 @@ const RestaurantMenuNav = ({ data, open, toggle }) => {
     document.body?.classList?.remove("menuOpen");
   }
   var allRestaurants = [];
-  data?.map((items) => {
-    const obj = {
+  data?.map((items) =>
+    allRestaurants.push({
       title: items.card.card.title,
       qty:
         items?.card?.card?.itemCards?.length ||
         items?.card?.card?.categories?.length,
-    };
-    allRestaurants.push(obj);
-  });
+    }),
+  );
   allRestaurants = allRestaurants.filter((x) => x.title !== undefined);
 
   return (
@@ -31,18 +28,14 @@ const RestaurantMenuNav = ({ data, open, toggle }) => {
               <div
                 className="menuNavItems"
                 key={restaurant.title}
-                onClick={toggle}
+                onClick={() => {
+                  document.getElementById(restaurant.title).scrollIntoView({
+                    behavior: "smooth",
+                  });
+                  toggle();
+                }}
               >
-                <span
-                  className={restaurant.title}
-                  onClick={() =>
-                    document.getElementById(restaurant.title).scrollIntoView({
-                      behavior: "smooth",
-                    })
-                  }
-                >
-                  {restaurant.title}
-                </span>
+                <span className={restaurant.title}>{restaurant.title}</span>
                 <span>{restaurant.qty}</span>
               </div>
             );

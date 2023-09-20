@@ -1,11 +1,11 @@
 const Footer = () => {
   return (
     <div
-      className="relative z-[10] w-full overflow-hidden bg-black px-5 py-0 text-white sm:min-h-[300px]"
+      className="relative z-[10] w-full overflow-hidden bg-black px-5 py-0 text-white md:min-h-[300px]"
       id="footered"
     >
-      <div className="relative mx-auto my-0 flex h-full max-w-[1200px] flex-col pt-6 sm:pt-[76px]">
-        <div className="hidden justify-between border-b border-solid border-b-[#4d4d4d] pb-5 sm:flex">
+      <div className="relative mx-auto my-0 flex h-full max-w-[1200px] flex-col pt-2 md:pt-[76px]">
+        <div className="hidden justify-between border-b border-solid border-b-[#4d4d4d] pb-5 md:flex">
           <div className="max-w-[300px]">
             <h3>Company</h3>
             <ul className="mx-0 mb-0 mt-[30px] list-none p-0 text-sm">
@@ -55,7 +55,7 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <div className="flex grow flex-col items-center gap-y-2 px-0 py-4 sm:flex-row">
+        <div className="flex grow flex-col items-center gap-y-2 px-0 py-4 md:flex-row">
           <div className="w-[142px] fill-white">
             <img
               className="w-[130px] sm:w-[182px]"

@@ -2,16 +2,9 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCartItem } from "../Utilities/CartSlice";
 import { selectLocationState } from "../Utilities/AppSlice";
-import { GiHamburgerMenu } from "react-icons/gi";
-import {
-  DefLogo,
-  SearchBtn,
-  ProfileBtn,
-  CartBtn,
-  OfferBtn,
-  AboutBtn,
-} from "../Assets/SVG";
-
+import { DefLogo, SearchBtn, ProfileBtn, CartBtn } from "../Assets/SVG";
+import { BiChevronDown } from "react-icons/bi";
+import { MdOutlineLocationOn } from "react-icons/md";
 const ShortHeader = ({ toggle, toggleTwo }) => {
   const location = useSelector(selectLocationState);
   const cartItems = useSelector(selectCartItem);
@@ -20,81 +13,81 @@ const ShortHeader = ({ toggle, toggleTwo }) => {
   cartItems.map((item) => {
     totalItems += item?.qty;
   });
-  const handleNavList = () => {
-    var navs = document.getElementById("shortNav");
-    navs.classList.toggle("shortNavActive");
-  };
+
   return (
-    <header className="sticky top-0 z-20 block h-full w-full border-b border-[#e9e9eb] bg-white shadow-[0_15px_40px_-20px_#282c3f26] md:hidden">
-      <div className="flex flex-col">
+    <>
+      <header
+        className="sticky top-0 z-20 block h-full w-full border-b border-[#e9e9eb] bg-white shadow-[0_15px_40px_-20px_#282c3f26] md:hidden"
+        id="shortHeader"
+      >
         <div className="flex h-full items-center justify-between px-4 py-2">
+          <div className="flex flex-col" onClick={toggle}>
+            <div className="flex items-center text-xl font-bold text-defBlack group-hover:text-defColor">
+              <MdOutlineLocationOn className="mr-1 text-2xl" />
+              <span>{location?.city}</span>
+            </div>
+            <div className="flex items-center">
+              <span className="textEllipse w-full overflow-hidden text-ellipsis break-words text-defGray">
+                {location?.address}
+              </span>
+              <BiChevronDown className="mr-4 text-2xl text-defColor" />
+            </div>
+          </div>
           <Link to="/">
             <DefLogo classList={"h-10 w-8 fill-defColor"} />
           </Link>
-          <span>
-            <GiHamburgerMenu
-              className="text-3xl text-defBlack"
-              onClick={handleNavList}
-            />
-          </span>
         </div>
-        <div
-          className="relative z-20 h-0 w-full overflow-hidden bg-white text-[1.125rem] font-medium text-primary  transition-[height] duration-[0.4s] ease-[ease]"
-          id="shortNav"
-        >
-          <Link to="/search" onClick={handleNavList}>
-            <div className="flex items-center gap-x-2 border-b border-t border-[#e9e9eb] px-5 py-2.5">
+      </header>
+      <footer
+        className="fixed bottom-0 left-0 z-20 block w-full border-t border-[#e9e9eb] bg-white md:hidden"
+        id="mobileNav"
+      >
+        <div className="relative flex flex-row justify-evenly bg-white text-xs font-medium uppercase text-defGray">
+          <Link to="/" className="group w-full py-2">
+            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
+              <DefLogo
+                classList={"h-5 w-5  fill-defGray group-hover:fill-defBlack"}
+              />
+              Home
+            </div>
+          </Link>
+          <Link to="/search" className="group w-full py-2">
+            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
               <SearchBtn
-                classList={"h-5 w-5 mr-2 fill-defBlack hover:fill-defColor"}
+                classList={"h-5 w-5  fill-defGray group-hover:fill-defBlack"}
               />
               Search
             </div>
           </Link>
-          <Link to="/offers" onClick={handleNavList}>
-            <div className="flex items-center gap-x-2 border-b border-[#e9e9eb] px-5 py-2.5">
-              <OfferBtn
-                classList={"h-5 w-5 mr-2 fill-defBlack hover:fill-defColor"}
-              />
-              Offers
-            </div>
-          </Link>
-          <Link to="/about" onClick={handleNavList}>
-            <div className="flex items-center gap-x-2 border-b border-[#e9e9eb] px-5 py-2.5">
-              <AboutBtn
-                classList={"h-5 w-5 mr-2 fill-defBlack hover:fill-defColor"}
-              />
-              About
-            </div>
-          </Link>
-          <Link onClick={toggleTwo}>
-            <div className="flex items-center gap-x-2 border-b border-[#e9e9eb] px-5 py-2.5">
-              <ProfileBtn
-                classList={"h-5 w-5 mr-2 fill-defBlack hover:fill-defColor"}
-              />
-              Signin
-            </div>
-          </Link>
-          <Link to="/cart" onClick={handleNavList}>
-            <div className="flex items-center gap-x-2 border-b border-[#e9e9eb] px-5 py-2.5">
+          <Link to="/cart" className="group w-full py-2">
+            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
               <span className="relative">
                 <CartBtn
                   classList={
-                    "h-5 w-5 stroke-primary stroke-[3px] fill-white hover:stroke-defColor"
+                    "h-5 w-5 stroke-defGray stroke-[3px] fill-white group-hover:stroke-defBlack group-hover:text-defBlack"
                   }
                 />
                 <span
-                  className="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-sm font-semibold group-hover:text-defColor"
+                  className="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 text-sm font-semibold group-hover:text-defBlack"
                   id="cartCounter"
                 >
                   {totalItems}
                 </span>
               </span>
-              <span className="ml-2">Cart</span>
+              <span>Cart</span>
+            </div>
+          </Link>
+          <Link onClick={toggleTwo} className="group w-full py-2">
+            <div className="flex flex-col items-center gap-y-[1px] group-hover:text-defBlack">
+              <ProfileBtn
+                classList={"h-5 w-5 fill-defGray group-hover:fill-defBlack"}
+              />
+              Signin
             </div>
           </Link>
         </div>
-      </div>
-    </header>
+      </footer>
+    </>
   );
 };
 export default ShortHeader;
