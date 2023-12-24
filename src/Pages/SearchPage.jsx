@@ -38,7 +38,7 @@ const SearchPage = () => {
   useTitle("Search for restaurants");
   return (
     <>
-      <div className="mx-auto w-full px-4">
+      <div className="w-full px-4 mx-auto">
         <div className="sticky top-[68px] z-10 h-20 w-full bg-white pb-5 pt-5 md:top-20 md:h-28 md:pt-[50px]">
           <div className="mx-auto flex h-12 max-w-[800px] overflow-hidden rounded-[3px] border-[1px] border-[#282c3f4d]">
             <input
@@ -53,7 +53,7 @@ const SearchPage = () => {
               }}
             />
             <button
-              className="cursor-pointer border-white bg-white px-3"
+              className="px-3 bg-white border-white cursor-pointer"
               onClick={() => {
                 setIsSearched(false);
                 setSearchText("");
@@ -69,10 +69,10 @@ const SearchPage = () => {
         </div>
         <div className="mx-auto h-full min-h-[100vh] w-full max-w-[800px] pb-8">
           {!isSearched ? (
-            <div className="relative mx-auto w-full">
+            <div className="relative w-full mx-auto">
               <div className="block">
                 <div className="p-5 text-xl font-bold">Popular Cuisines</div>
-                <div className="searchBody w-ful flex cursor-pointer gap-x-4 overflow-x-auto px-5">
+                <div className="flex px-5 overflow-x-auto cursor-pointer searchBody w-ful gap-x-4">
                   {preSearchShimmer}
                 </div>
               </div>
@@ -80,9 +80,11 @@ const SearchPage = () => {
           ) : allRestaurants.length > 0 ? (
             <SearchCard data={allRestaurants} />
           ) : (
-            <div className="pt-4 text-center text-xl font-bold text-defBlack">
-              No items match your search query
-            </div>
+            searchText?.length > 2 && (
+              <div className="pt-4 text-xl font-bold text-center text-defBlack">
+                No items match your search query
+              </div>
+            )
           )}
         </div>
       </div>

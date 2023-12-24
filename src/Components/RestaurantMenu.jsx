@@ -21,9 +21,9 @@ const VegSection = ({ data, isVeg, setIsVeg }) => {
 };
 const TopPicksMenu = ({ data }) => {
   return (
-    <div className="border-b-8 border-b-[#f1f1f6] pb-8">
+    <div className="border-b-8 border-b-[#f1f1f6] pb-8" id={data?.title}>
       <div className="py-4 text-lg font-bold text-[#3e4152]">{data?.title}</div>
-      <div className="topPicks flex gap-x-5 overflow-y-hidden overflow-x-scroll">
+      <div className="flex overflow-x-scroll overflow-y-hidden topPicks gap-x-5">
         {data?.carousel?.map((item) => {
           return (
             <img
